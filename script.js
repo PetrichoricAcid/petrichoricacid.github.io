@@ -8,14 +8,14 @@
   ];
 
   const COUNTS = {
-    home:'5 items', about:'1 item', projects:'3 items',
+    quickaccess:'5 items', about:'1 item', projects:'3 items',
     skills:'3 items', contact:'3 items', mypc:'5 items',
   };
 
-  const VIEWS = ['home','about','projects','skills','contact','search','mypc'];
+  const VIEWS = ['quickaccess','about','projects','skills','contact','search','mypc'];
 
   // ── Navigation history ──────────────────────────────────────
-  let history = ['home'];
+  let history = ['quickaccess'];
   let histIdx  = 0;
 
   function navigate(e, label, view) {
@@ -32,7 +32,7 @@
     if (histIdx > 0) {
       histIdx--;
       const v = history[histIdx];
-      const labels = { home:'Home', about:'About Me', projects:'Projects', skills:'Skills', contact:'Contact' };
+      const labels = { quickaccess:'Quick Access', about:'About Me', projects:'Projects', skills:'Skills', contact:'Contact' };
       _showView(labels[v] || v, v);
       updateNavBtns();
     }
@@ -65,7 +65,7 @@
   // ── Search ──────────────────────────────────────────────────
   function onSearch(q) {
     if (!q.trim()) {
-      navigate(null, 'Home', 'home');
+      navigate(null, 'QuickAccess', 'quickaccess');
       return;
     }
     const results = ALL_ITEMS.filter(item =>
