@@ -1,0 +1,473 @@
+<!-- 
+  things to do: 
+    publish to github
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Files — File Explorer</title>
+  <link rel="icon" href="icons/quickAccess.ico" type="image/x-icon">
+  <meta name="description" content="Jakob Duquaine's Personal Site">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+<div class="window">
+
+  <!-- ═══ Title Bar ════════════════════════════════════════ -->
+  <div class="titlebar">
+    <span class="titlebar-icon"><img src="icons/quickAccess.ico" width="18px" height="auto"></span>
+    <span class="titlebar-title" id="title-text">Quick Access — File Explorer</span>
+    <div class="titlebar-controls">
+      <button title="Minimize">&#x2212;</button>
+      <button title="Maximize">&#x25A1;</button>
+      <button class="close" title="Close" onclick="document.querySelector('.window').style.opacity='0'">&#x2715;</button>
+    </div>
+  </div>
+
+  <!-- ═══ Navigation Bar ═══════════════════════════════════ -->
+  <div class="navbar">
+    <button class="nav-btn" id="btn-back" disabled title="Back" onclick="goBack()">&#8592;</button>
+    <button class="nav-btn" id="btn-fwd" disabled title="Forward">&#8594;</button>
+    <button class="nav-btn" disabled title="Up">&#8593;</button>
+    <button class="nav-btn" title="Refresh" onclick="window.location.reload()">&#8635;</button>
+
+    <div class="address-bar">
+      <span><img src="icons/quickAccess.ico" width="18px" height="auto"></span>
+      <span class="address-sep">&#x276F;</span>
+      <span class="address-crumb" id="crumb">Quick Access</span>
+    </div>
+
+    <div class="search-bar">
+      <span>&#128269;</span>
+      <input type="text" placeholder="Search" id="search-input" oninput="onSearch(this.value)" />
+    </div>
+  </div>
+
+  <!-- ═══ Ribbon ═══════════════════════════════════════════ -->
+  <div class="ribbon">
+    <button class="ribbon-btn">&#43; New &nbsp;&#x25BE;</button>
+    <div class="ribbon-sep"></div>
+    <button class="ribbon-btn">&#9986; Cut</button>
+    <button class="ribbon-btn">&#10697; Copy</button>
+    <button class="ribbon-btn">&#128203; Paste</button>
+    <div class="ribbon-sep"></div>
+    <button class="ribbon-btn">&#128065; View &nbsp;&#x25BE;</button>
+    <button class="ribbon-btn">&#8693; Sort &nbsp;&#x25BE;</button>
+    <button class="ribbon-btn" style="margin-left:auto">&#8942;</button>
+  </div>
+
+  <!-- ═══ Body ═════════════════════════════════════════════ -->
+  <div class="body">
+
+    <!-- ─── Sidebar ───────────────────────────────────────── -->
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSidebarGroup(this)">
+          <span class="chevron">&#9660;</span> Quick access
+        </div>
+        <div class="sidebar-group-body">
+          <a href="#" class="sidebar-item active" onclick="navigate(event,'Home','home')">
+            <span class="icon"><img src="icons/quickAccess.ico" width="18px" height="auto"></span> Quick Access <span class="pin"><img src="icons/pin.ico" width="18px" height="auto"></span>
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'About Me','about')">
+            <span class="icon"><img src="icons/users.ico" width="18px" height="auto"></span> About Me <span class="pin"><img src="icons/pin.ico" width="18px" height="auto"></span>
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Projects','projects')">
+            <span class="icon"><img src="icons/folder.ico" width="18px" height="auto"></span> Projects <span class="pin"><img src="icons/pin.ico" width="18px" height="auto"></span>
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Contact','contact')">
+            <span class="icon"><img src="icons/NAS.ico" width="18px" height="auto"></span> Contact <span class="pin"><img src="icons/pin.ico" width="18px" height="auto"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSidebarGroup(this)">
+          <span class="chevron">&#9660;</span> This PC
+        </div>
+        <div class="sidebar-group-body">
+          <a href="#" class="sidebar-item" onclick="navigate(event,'About Me','about')">
+            <span class="icon"><img src="icons/pictures.ico" width="18px" height="auto"></span> Pictures
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Projects','projects')">
+            <span class="icon"><img src="icons/videos.ico" width="18px" height="auto"></span> Videos
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Projects','projects')">
+            <span class="icon"><img src="icons/documents.ico" width="18px" height="auto"></span> Documents
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'My PC','mypc')">
+            <span class="icon"><img src="icons/myPC.ico" width="18px" height="auto"></span> My PC
+          </a>
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Skills','skills')">
+            <span class="icon"><img src="icons/winDisk.ico" width="18px" height="auto"></span> Skills Disk (C:)
+          </a>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- ─── Main Content ──────────────────────────────────── -->
+    <main class="content" id="content-area">
+
+      <!-- ══ HOME ══════════════════════════════════════════ -->
+      <div id="view-home">
+
+        <div class="section-header" onclick="toggleSection('qa-section',this)">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Quick access</h2>
+        </div>
+        <div class="section-body" id="qa-section">
+          <div class="folder-grid">
+
+            <a href="#" class="folder-item" onclick="navigate(event,'About Me','about')">
+              <div class="folder-icon"><img src="icons/users.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">About Me</div>
+                <div class="folder-sub">Who I am</div>
+              </div>
+            </a>
+
+            <a href="#" class="folder-item" onclick="navigate(event,'Projects','projects')">
+              <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">Projects</div>
+                <div class="folder-sub">My work</div>
+              </div>
+            </a>
+            
+            <a href="#" class="folder-item" onclick="navigate(event,'MyPC','mypc')">
+              <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">My PC</div>
+                <div class="folder-sub">Check out my specs</div>
+              </div>
+            </a>
+
+            <a href="#" class="folder-item" onclick="navigate(event,'Contact','contact')">
+              <div class="folder-icon"><img src="icons/NAS.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">Contact</div>
+                <div class="folder-sub">Get in touch</div>
+              </div>
+            </a>
+
+            <a href="#" class="folder-item" onclick="navigate(event,'Skills','skills')">
+              <div class="folder-icon"><img src="icons/winDisk.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">My Skills</div>
+                <div class="folder-sub">See what I can do</div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="section-header" onclick="toggleSection('recent-section',this)">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Recent</h2>
+        </div>
+        <div class="section-body" id="recent-section">
+          <div class="folder-grid">
+
+            <a href="#" class="folder-item" onclick="event.preventDefault(); showToast({ icon: 'icons/documentFile.ico', title: 'latest-project.md', message: 'This is my latest project.....' })">
+              <div class="folder-icon" style="font-size:28px"><img src="icons/documentFile.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">latest-project.md</div>
+                <div class="folder-sub">Just now</div>
+              </div>
+            </a>
+
+            <a href="#" class="folder-item" onclick="event.preventDefault(); showToast({ icon: 'icons/pictureFile.ico', title: 'portfolio-screenshot.png', message: 'I do not have a portfolio yet.....' })">
+              <div class="folder-icon" style="font-size:28px"><img src="icons/pictureFile.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">portfolio-screenshot.png</div>
+                <div class="folder-sub">Yesterday</div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div><!-- /view-home -->
+
+
+      <!-- ══ ABOUT ══════════════════════════════════════════ -->
+      <div id="view-about" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>About Me</h2>
+        </div>
+        <div class="prose">
+          <div style="display:flex; align-items:flex-start; gap:16px; margin-bottom:12px;">
+            <div>
+                <p style="margin-bottom:8px;">
+                  <img src="files/hi.gif" width="24px">
+                  Hi! I'm <strong>Jakob Duquaine</strong> I'm a psychology major and computer science minor at St. Norbert College, De Pere, WI.
+                </p>
+                <p style="color:var(--text-muted)">
+
+                Hey, I'm your average college nerd. I'm the secretary of SNC's Computer Science Club and I am the president of the Strings n' Things crafting Club. <br>
+                <ul class="dashed" style="color:var(--text-muted)">
+                  <li>
+                    I love videogames, I've been playing Deadlock a lot recently (a lot...), with Balatro, KSP, and Project Zomboid intermixed. I used to be obsessed with Elden Ring and play CS2 all the time, CS:GO was better.
+                  </li>
+                  <li>
+                    I do crafts occassionally in my free time, I enjoy plastic canvas and whatever other projects I'm given at Strings n' Things. My next project will be sewing Cheez-It crackers.
+                  </li>
+                  <li>
+                    I love my dorm plants, I care for an aloe named Planty the first, two succulants, a pot of bachelors (cornflowers), and a mystery herb (I forgot what I planted....).
+                  </li>
+                  <li>
+                    I've been having fun starting a homelab using a cheap ThinkPad I got from my high school, streaming whatever current anime I'm watching from Jellyfin and hosting a Minecraft server that hasn't quite been set up yet for local use. I also am exploring some coding projects, making my own Mahjong in CMake with C++ to somewhat learn GUI handling with SDL3. 
+                  </li>
+                </ul>
+              </p>
+            </div>
+            <img src="files/me.jpg" width="180" height="auto" style="border-radius:6px; flex-shrink:0;">
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PROJECTS ═══════════════════════════════════════ -->
+      <div id="view-projects" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Projects</h2>
+        </div>
+        <div class="folder-grid">
+
+          <a href="#" class="folder-item" target="_blank">
+            <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Project One</div>
+              <div class="folder-sub">This website!</div>
+            </div>
+          </a>
+
+          <a href="#" class="folder-item">
+            <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Project Two</div>
+              <div class="folder-sub">Coming soon!</div>
+            </div>
+          </a>
+
+          <a href="#" class="folder-item">
+            <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Project Three</div>
+              <div class="folder-sub">Coming soon!</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+
+      <!-- ══ SKILLS ═════════════════════════════════════════ -->
+      <div id="view-skills" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Skills</h2>
+        </div>
+        <div class="folder-grid">
+
+          <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+              ('Soft Skills', [
+              ['Things I am generally good at!',   'Communication, detail-orientation, personalization, determination, leadership']])">
+            <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Soft Skills</div>
+              <div class="folder-sub">Things I'm good at</div>
+            </div>
+          </a>
+
+          <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+              ('Technical Skills', [
+              ['Tools I have experience with!',  'Microsoft Suite & Google Workspace, Apple School Manager, Papercut, Jamf School & Pro Device Manager, Zendesk, Zoom, Mi9 Retail POS, ACS Inventory']])">
+            <div class="folder-icon"><img src="icons/program.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Technical Skills</div>
+              <div class="folder-sub">Tools I've used</div>
+            </div>
+          </a>
+
+          <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+              ('Related Coursework', [
+              ['PSYC100',   'Intro to Psychology'],
+              ['PSYC212',   'Adult Psychology'],
+              ['CSCI205',   'Software Engineering & Elementary Data Structures'],
+              ])">
+            <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Related Coursework</div>
+              <div class="folder-sub">Classes I've taken</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+
+      <!-- ══ CONTACT ════════════════════════════════════════ -->
+      <div id="view-contact" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Contact</h2>
+        </div>
+        <div class="folder-grid">
+
+          <a href="mailto:jakob.duquaine@snc.edu" class="folder-item">
+            <div class="folder-icon"><img src="icons/mail.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">Email</div>
+              <div class="folder-sub">jakob.duquaine@snc.edu</div>
+            </div>
+          </a>
+
+          <a href="https://github.com/PetrichoricAcid" target="_blank" class="folder-item">
+            <div class="folder-icon"><img src="icons/github.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">GitHub</div>
+              <div class="folder-sub">https://github.com/PetrichoricAcid</div>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jakobduquaine/" target="_blank" class="folder-item">
+            <div class="folder-icon"><img src="icons/linkedin.ico" width="18px" height="auto"></div>
+            <div class="folder-info">
+              <div class="folder-name">LinkedIn</div>
+              <div class="folder-sub">linkedin.com/in/jakobduquaine</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ══ My PC ════════════════════════════════════════ -->
+      <div id="view-mypc" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>My PC</h2>
+        </div>
+          <div class="folder-grid">
+              <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+                  ('Asus Zenbook 14', [
+                  ['OS',    'Windows 11 Home'],
+                  ['CPU',   'Intel(R) Core Ulta 9 285H (16) @ 5.40 GHz'],
+                  ['GPU',   'Intel(R) Arc 140T 16GB @ 2.35 GHz'],
+                  ['RAM',   '32GB'],
+                  ['Disk',  '1TB'],])"
+              >
+                <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
+                <div class="folder-info">
+                  <div class="folder-name">Daily Laptop</div>
+                  <div class="folder-sub">Asus Vivobook 14 14"</div>
+                </div>
+              </a>
+
+              <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+                  ('HP Pavilion Gaming Desktop TG01-2xxx', [
+                  ['OS1',   'LMDE 7 (gigi)'],
+                  ['OS2',   'Windows 10 IoT Enterprise LTSC'],
+                  ['DE',    'Cinnamon 6.6.7'],
+                  ['CPU',   'AMD Ryzen 7 5700G (16) @ 3.80GHz'],
+                  ['GPU1',  'AMD Radeon RX 6600 XT [Discrete]'],
+                  ['GPU2',  'AMD Radeon Vega Series [Integrated]'],
+                  ['RAM',   '64GB DDR4 3200MHz'],
+                  ['Disk',  '2TB Samsung SSD 990 EVO Plus'],])">
+                <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
+                <div class="folder-info">
+                  <div class="folder-name">Gaming PC</div>
+                  <div class="folder-sub">HP Pavilion TG01-2xxx</div>
+                </div>
+              </a>
+
+              <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+                  ('Lenovo ThinkPad E590', [
+                  ['OS',    'Debian GNU 12 (bookworm)'],
+                  ['DE',    'Xfce 4.18'],
+                  ['CPU',   'Intel Core i5-8265U @ 1.600GHz'],
+                  ['GPU',   'Mesa Intel UHD Graphics 620'],
+                  ['RAM',   '8GB'],
+                  ['Disk',  '256GB'],])"
+                >
+                <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
+                <div class="folder-info">
+                  <div class="folder-name">Server Laptop</div>
+                  <div class="folder-sub">Lenovo ThinkPad E590</div>
+                </div>
+              </a>
+          </div>
+          
+          <!-- Divider -->
+          <hr style="border:none; border-top:1px solid var(--border); margin: 4px 0 12px 0;">
+
+          <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>My Media</h2>
+        </div>
+          <div class="folder-grid">
+            <a href="https://www.goodreads.com/user/show/166074126-jakob" target="_blank" class="folder-item">
+              <div class="folder-icon"><img src="icons/goodreads.svg" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">Goodreads</div>
+                <div class="folder-sub">goodreads.com/user/166074126-jakob</div>
+              </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1LxxlaA6f59Mg5Q0Id3uii3DyMYjyO39PfXjHAgglP0U/edit?gid=0#gid=0" target="_blank" class="folder-item">
+              <div class="folder-icon"><img src="icons/sheets.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">myAnime List</div>
+                <div class="folder-sub">Google Sheets Doc</div>
+              </div>
+            </a>
+        </div>
+      </div>
+
+      <!-- ══ SEARCH RESULTS ══════════════════════════════════ -->
+      <div id="view-search" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Search results</h2>
+        </div>
+        <div class="folder-grid" id="search-results"></div>
+      </div>
+
+
+      <!-- ══ Properties Dialog ══ -->
+      <div id="properties-overlay" style="display:none" onclick="closeProperties(event)">
+        <div class="properties-dialog">
+          <div class="properties-titlebar">
+            <span id="prop-title">Item Properties</span>
+            <button onclick="document.getElementById('properties-overlay').style.display='none'">&#x2715;</button>
+          </div>
+          <div class="properties-body" id="prop-body"></div>
+          <div class="properties-footer">
+            <button onclick="document.getElementById('properties-overlay').style.display='none'">OK</button>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+  </div>
+
+  <!-- ═══ Status Bar ══════════════════════════════════════ -->
+  <div class="statusbar">
+    <span id="status-count">5 items</span>
+    <span id="status-selected"></span>
+  </div>
+
+</div><!-- /window -->
+
+</body>
+</html>
