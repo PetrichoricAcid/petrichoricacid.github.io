@@ -1,8 +1,3 @@
-<!-- 
-  things to do: 
-    publish to github
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +38,7 @@
     </div>
 
     <div class="search-bar">
-      <span>&#128269;</span>
+      <span><img src="icons/search.ico" width="12px" height="auto"></span>
       <input type="text" placeholder="Search" id="search-input" oninput="onSearch(this.value)" />
     </div>
   </div>
@@ -220,13 +215,16 @@
                     I love videogames, I've been playing Deadlock a lot recently (a lot...), with Balatro, KSP, and Project Zomboid intermixed. I used to be obsessed with Elden Ring and play CS2 all the time, CS:GO was better.
                   </li>
                   <li>
+                    I listen to everything but modern country. I'm your local J-Pop, City Pop, and Fusion enjoyer, occassionally I will put on an early 2000's pop mix from when I was young.
+                  </li>
+                  <li>
                     I do crafts occassionally in my free time, I enjoy plastic canvas and whatever other projects I'm given at Strings n' Things. My next project will be sewing Cheez-It crackers.
                   </li>
                   <li>
-                    I love my dorm plants, I care for an aloe named Planty the first, two succulants, a pot of bachelors (cornflowers), and a mystery herb (I forgot what I planted....).
+                    I love my dorm plants, I care for an aloe named Planty the first, three succulants, a pot of bachelors (cornflowers), and a cilantro
                   </li>
                   <li>
-                    I've been having fun starting a homelab using a cheap ThinkPad I got from my high school, streaming whatever current anime I'm watching from Jellyfin and hosting a Minecraft server that hasn't quite been set up yet for local use. I also am exploring some coding projects, making my own Mahjong in CMake with C++ to somewhat learn GUI handling with SDL3. 
+                    I've been having fun starting a homelab using a cheap ThinkPad I got from my high school, streaming whatever current anime I'm watching from Jellyfin and hosting a Minecraft server of my "forever world" I started in early 2025. I also am exploring some coding projects, making my own Mahjong in CMake with C++ to somewhat learn GUI handling with SDL3. 
                   </li>
                 </ul>
               </p>
@@ -282,7 +280,7 @@
 
           <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
               ('Soft Skills', [
-              ['Things I am generally good at!',   'Communication, detail-orientation, personalization, determination, leadership']])">
+              ['Things I am generally good at!',   'Communication<br>Detail-orientation <br>Personalization<br>Determination <br>Leadership']])">
             <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
             <div class="folder-info">
               <div class="folder-name">Soft Skills</div>
@@ -292,7 +290,7 @@
 
           <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
               ('Technical Skills', [
-              ['Tools I have experience with!',  'Microsoft Suite & Google Workspace, Apple School Manager, Papercut, Jamf School & Pro Device Manager, Zendesk, Zoom, Mi9 Retail POS, ACS Inventory']])">
+              ['Tools I have experience with!', 'Microsoft Suite & Google Workspace<br>Apple School Manager<br>Papercut<br>Jamf School & Pro Device Manager<br>Zendesk<br>Zoom<br>Mi9 Retail POS<br>ACS Inventory']])">
             <div class="folder-icon"><img src="icons/program.ico" width="18px" height="auto"></div>
             <div class="folder-info">
               <div class="folder-name">Technical Skills</div>
@@ -396,13 +394,27 @@
                   ['DE',    'Xfce 4.18'],
                   ['CPU',   'Intel Core i5-8265U @ 1.600GHz'],
                   ['GPU',   'Mesa Intel UHD Graphics 620'],
-                  ['RAM',   '8GB'],
+                  ['RAM',   '24GB'],
                   ['Disk',  '256GB'],])"
                 >
                 <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
                 <div class="folder-info">
                   <div class="folder-name">Server Laptop</div>
                   <div class="folder-sub">Lenovo ThinkPad E590</div>
+                </div>
+              </a>
+
+              <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
+                  ('Docker Images', [
+                  ['Video Streaming',   'Jellyfin'],
+                  ['Minecraft Server',  'Crafty Controller'],
+                  ['Notifications',     'Uptime Kuma'],
+                  ['Homepage',          'Homarr'],
+                  ])">
+                <div class="folder-icon"><img src="icons/docker.ico" width="18px" height="auto"></div>
+                <div class="folder-info">
+                  <div class="folder-name">Docker Images</div>
+                  <div class="folder-sub">Containers on the server</div>
                 </div>
               </a>
           </div>
@@ -428,6 +440,14 @@
               <div class="folder-info">
                 <div class="folder-name">myAnime List</div>
                 <div class="folder-sub">Google Sheets Doc</div>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/petrichoricacid" target="_blank" class="folder-item">
+              <div class="folder-icon"><img src="icons/instagram.ico" width="18px" height="auto"></div>
+              <div class="folder-info">
+                <div class="folder-name">Instagram</div>
+                <div class="folder-sub">Sometimes I post...</div>
               </div>
             </a>
         </div>
