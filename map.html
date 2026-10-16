@@ -33,7 +33,7 @@
         .then(r => r.json())
         .then(data => {
             const url = data.files['ngrok-url.txt'].content.trim();
-            frame.src = url;
+            frame.src = url + '?ngrok-skip-browser-warning=true';
             status.textContent = 'Server online';
         })
         .catch(() => {
