@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jakob's Minecraft Map</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#1a1a1a; height:100vh; display:flex; flex-direction:column; font-family:'Segoe UI',sans-serif; }
+    iframe { flex:1; border:none; width:100%; }
+    .bar {
+      background:#1a1a1a; color:#9a9a9a; font-size:12px;
+      padding:6px 14px; border-bottom:1px solid #3d3d3d;
+      display:flex; align-items:center; gap:12px;
+    }
+    .bar a { color:#0078d4; text-decoration:none; }
+    #status { margin-left:auto; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a href="index.html">← Back</a>
+    <span>Live Minecraft Map</span>
+    <span id="status">Loading... If this fails, it's because only one person can view the site at a time... </span>
+  </div>
+  <iframe id="map-frame" src="about:blank"></iframe>
+
+  <script>
+    const GIST_ID = "f8148b75983e78741f9969f84858fc3a";
+    const status  = document.getElementById('status');
+    const frame   = document.getElementById('map-frame');
+
+    fetch(`https://api.github.com/gists/${GIST_ID}`)
+        .then(r => r.json())
+        .then(data => {
+            const url = data.files['ngrok-url.txt'].content.trim();
+            frame.src = url;
+            status.textContent = 'Server online';
+        })
+        .catch(() => {
+            status.textContent = 'Server offline';
+    });
+  </script>
+</body>
+</html>

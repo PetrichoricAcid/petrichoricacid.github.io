@@ -206,13 +206,13 @@
 
 
   function openProperties(title, specs) {
-  document.getElementById('prop-title').textContent = title + ' Properties';
-  document.getElementById('prop-body').innerHTML = specs
-    .map(([k, v]) => `<div class="prop-row"><span class="prop-key">${k}</span><span>${v}</span></div>`)
-    .join('');
-  document.getElementById('properties-overlay').style.display = 'flex';
-}
-function closeProperties(e) {
-  if (e.target.id === 'properties-overlay')
-    document.getElementById('properties-overlay').style.display = 'none';
-}
+    document.getElementById('prop-title').textContent = title + ' Properties';
+    document.getElementById('prop-body').innerHTML = specs
+      .map(([k, v]) => `<div class="prop-row"><span class="prop-key">${k}</span><span>${v}</span></div>`)
+      .join('');
+    document.getElementById('properties-overlay').style.display = 'flex';
+  }
+  function closeProperties(e) {
+    if (e.target.id === 'properties-overlay')
+      document.getElementById('properties-overlay').style.display = 'none';
+  }
