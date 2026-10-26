@@ -10,7 +10,7 @@
 
   const COUNTS = {
     quickaccess:'5 items', about:'1 item', projects:'3 items',
-    skills:'3 items', contact:'3 items', mypc:'5 items', pictures: '0 items',
+    skills:'3 items', contact:'3 items', mypc:'5 items', pictures: '13 items',
   };
 
   const VIEWS = ['quickaccess','about','projects','skills','contact','search','mypc', 'pictures'];
