@@ -5,14 +5,15 @@
     { label:'Skills',      view:'skills',   icon:'icons/gearFile.ico', sub:'What I know' },
     { label:'Contact',     view:'contact',  icon:'icons/NAS.ico', sub:'Get in touch' },
     { label:'My PC',       view:'mypc',     icon:'icons/mypc.ico', sub:'Check out my specs' },
+    { label:'Pictures',    view:'pictures',  icon:'/icons/pictureFile.ico', sub:'Check out my crafts'}
   ];
 
   const COUNTS = {
     quickaccess:'5 items', about:'1 item', projects:'3 items',
-    skills:'3 items', contact:'3 items', mypc:'5 items',
+    skills:'3 items', contact:'3 items', mypc:'5 items', pictures: '0 items',
   };
 
-  const VIEWS = ['quickaccess','about','projects','skills','contact','search','mypc'];
+  const VIEWS = ['quickaccess','about','projects','skills','contact','search','mypc', 'pictures'];
 
   // ── Navigation history ──────────────────────────────────────
   let history = ['quickaccess'];
@@ -216,3 +217,16 @@
     if (e.target.id === 'properties-overlay')
       document.getElementById('properties-overlay').style.display = 'none';
   }
+
+  function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption;
+  document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+  document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+  });

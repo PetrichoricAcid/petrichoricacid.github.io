@@ -89,7 +89,7 @@
           <span class="chevron">&#9660;</span> This PC
         </div>
         <div class="sidebar-group-body">
-          <a href="#" class="sidebar-item" onclick="navigate(event,'About Me','about')">
+          <a href="#" class="sidebar-item" onclick="navigate(event,'Pictures','pictures')">
             <span class="icon"><img src="icons/pictures.ico" width="18px" height="auto"></span> Pictures
           </a>
           <a href="#" class="sidebar-item" onclick="navigate(event,'Projects','projects')">
@@ -229,7 +229,7 @@
                 </ul>
               </p>
             </div>
-            <img src="files/me.jpg" width="180" height="auto" style="border-radius:6px; flex-shrink:0;">
+            <img src="files/me.jpg" width="180" height="auto" style="border-radius:6px; flex-shrink:0;" loading="lazy">
           </div>
         </div>
       </div>
@@ -258,11 +258,11 @@
             </div>
           </a>
 
-          <a href="#" class="folder-item">
+          <a href="#" class="folder-item" onclick="navigate(event,'Pictures','pictures')">
             <div class="folder-icon"><img src="icons/folder.ico" width="18px" height="auto"></div>
             <div class="folder-info">
-              <div class="folder-name">Project Three</div>
-              <div class="folder-sub">Coming soon!</div>
+              <div class="folder-name">Craft Projects</div>
+              <div class="folder-sub">Check out what I've made</div>
             </div>
           </a>
 
@@ -302,7 +302,10 @@
               ('Related Coursework', [
               ['PSYC100',   'Intro to Psychology'],
               ['PSYC212',   'Adult Psychology'],
+              ['PSYC301',   'Basic Principles and Methods of Psychological Research'],
               ['CSCI205',   'Software Engineering & Elementary Data Structures'],
+              ['CSCI225',   'Machine Organization & Assembly Language'],
+              ['CSCI330',   'Database Techniques & Modeling']
               ])">
             <div class="folder-icon"><img src="icons/myPC.ico" width="18px" height="auto"></div>
             <div class="folder-info">
@@ -373,9 +376,9 @@
 
               <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
                   ('HP Pavilion Gaming Desktop TG01-2xxx', [
-                  ['OS1',   'LMDE 7 (gigi)'],
-                  ['OS2',   'Windows 10 IoT Enterprise LTSC'],
-                  ['DE',    'Cinnamon 6.6.7'],
+                  ['Main OS',   'LMDE 7 (gigi)'],
+                  ['Dual-Boot OS',   'Windows 10 IoT Enterprise LTSC'],
+                  ['DE',    'KDE Plasma'],
                   ['CPU',   'AMD Ryzen 7 5700G (16) @ 3.80GHz'],
                   ['GPU1',  'AMD Radeon RX 6600 XT [Discrete]'],
                   ['GPU2',  'AMD Radeon Vega Series [Integrated]'],
@@ -406,10 +409,11 @@
 
               <a href="#" class="folder-item" onclick="event.preventDefault(); openProperties
                   ('Docker Images', [
-                  ['Video Streaming',   'Jellyfin'],
-                  ['Minecraft Server',  'Crafty Controller'],
-                  ['Notifications',     'Uptime Kuma'],
-                  ['Homepage',          'Homarr'],
+                  ['Media Streaming',   'Jellyfin + Dispatcharr (IP-TV.org), Navidrome'],
+                  ['Minecraft Server',  'Crafty Controller + Bluemap'],
+                  ['Management',        'Zabbix [WIP]'],
+                  ['Homepage',          'Homarr + Glances'],
+                  ['Port Forwarding',   'Ngrok']
                   ])">
                 <div class="folder-icon"><img src="icons/docker.ico" width="18px" height="auto"></div>
                 <div class="folder-info">
@@ -453,6 +457,121 @@
         </div>
       </div>
 
+      <!-- ══ PICTURES ══════════════════════════════════════ -->
+      <div id="view-pictures" style="display:none">
+        <div class="section-header">
+          <span class="chevron">&#x25BC;</span>
+          <h2>Craft Projects & 3D Prints</h2>
+        </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:8px; margin-bottom:24px;">
+            
+            <div class="pic-tile" onclick="openLightbox('files/hydrangeas.jpg','Plastic Canvas Hygrangea Coasters: Design Works Kit JAS-044 1165')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/hydrangeas_thumb.png" alt="Plastic Canvas Hygrangea Coasters" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Plastic Canvas Hygrangea Coasters</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/bag.jpg','Crochet Bag: Instruction by Brianna Partyka')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/bag_thumb.png" alt="Crochet Bag" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Crochet Bag</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/mushrooms.jpg','Mushroom Coasters: A Herrschners Kit')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/mushrooms_thumb.png" alt="Mushroom Coasters" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Mushroom Coasters</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/paws.jpg','Paw Print Coasters: From a Craftways PDF on Pinterest')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/paws_thumb.png" alt="Paw Print Coasters" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Paw Print Coasters</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/brushbuddy.jpg','Brushbuddy from WHA: Big Simi on Makerworld')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/brush_buddy_thumb.png" alt="Brushbuddy" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Brushbuddy</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/hawlucha.jpg','Mega Hawlucha Ball: Chris\'s print lab')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/hawlucha_thumb.png" alt="Mega Hawlucha Ball" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Mega Hawlucha Ball</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/junimo.jpg','Junimo: Big Simi on Makerworld')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/junimo_thumb.png" alt="Junimo" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Junimo</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/pan.jpg','Pansexual flag done at an SNC Spectrum meeting')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/pan_thumb.png" alt="Pan Painting" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Pan Painting</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/pot.jpeg','Mosiac Flower Pot done at an SNC E2K event')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/pot_thumb.png" alt="Mosiac Flower Pot" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Mosiac Flower Pot</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/potboy.jpg','Pot Boy Planter by Billy&Katie Hooper on Makerworld')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/potboy_thumb.png" alt="Pot Boy Flower Pot" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Pot Boy Flower Pot</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/trashbin.jpg','Raccoon Dumpster Deck Box MTG by PrinterBrain on Makerworld')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/trashbin_thumb.png" alt="Raccoon Dumpster Deck Box MTG" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>"Trash Deck" MTG Box</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/book.jpg','Spellbook V3 Commander Deck Box by Joak1m on Makerworld')">
+              <div class="img-wrap">
+                <div class="skeleton-box"></div>
+                <img src="files/thumbnails/book_thumb.png" alt="Book Deck Box" loading="lazy" onload="this.classList.add('loaded')">
+              </div>
+              <span>Book Deck Box</span>
+            </div>
+
+            <div class="pic-tile" onclick="openLightbox('files/chest.jpg','Minecraft Chest MTG Deck Box by D3signLane on Makerworld')">
+                <div class="img-wrap">
+                  <div class="skeleton-box"></div>
+                  <img src="files/thumbnails/chest_thumb.png" alt="Minecraft Chest Deck Box" loading="lazy" onload="this.classList.add('loaded')">
+                </div>
+                <span>Minecraft Chest Deck Box</span>
+              </div>
+
+          </div>
+      </div>
+
       <!-- ══ SEARCH RESULTS ══════════════════════════════════ -->
       <div id="view-search" style="display:none">
         <div class="section-header">
@@ -481,6 +600,12 @@
     </main>
   </div>
 
+  <!-- ══ Lightbox ══ -->
+  <div id="lightbox" onclick="closeLightbox()" style="display:none">
+    <img id="lightbox-img" src="" alt="">
+    <span id="lightbox-caption"></span>
+  </div>
+
   <!-- ═══ Status Bar ══════════════════════════════════════ -->
   <div class="statusbar">
     <span id="status-count">5 items</span>
@@ -488,6 +613,5 @@
   </div>
 
 </div><!-- /window -->
-
 </body>
 </html>
