@@ -5,7 +5,7 @@
     { label:'Skills',      view:'skills',   icon:'icons/gearFile.ico', sub:'What I know' },
     { label:'Contact',     view:'contact',  icon:'icons/NAS.ico', sub:'Get in touch' },
     { label:'My PC',       view:'mypc',     icon:'icons/mypc.ico', sub:'Check out my specs' },
-    { label:'Pictures',    view:'pictures',  icon:'/icons/pictureFile.ico', sub:'Check out my crafts'}
+    { label:'Pictures',    view:'pictures', icon:'icons/pictureFile.ico', sub:'Check out my crafts'}
   ];
 
   const COUNTS = {
